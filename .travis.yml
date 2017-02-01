@@ -1,0 +1,56 @@
+language: c
+compiler: gcc
+dist: trusty
+sudo: required
+
+
+# safelist
+branches:
+  only:
+  - master
+
+
+addons:
+  hosts:
+  - travis.dev
+  - joshkalderimis.com
+
+
+before_install:
+ - echo 'Before Install Stage........'
+ - sudo dpkg --add-architecture i386
+ - sudo apt-get update
+ - sudo apt-get install build-essential
+ - sudo apt-get install libc6:i386
+
+ 
+install:
+ - echo 'Install Stage........'
+# - echo 'Install cross platform tool chain...'
+# - sudo tar -jxvf buildroot-gcc342.tar.bz2 -C /opt/
+# - sudo ls -l /opt
+# - echo 'cache components...'
+
+
+before_script:
+ - echo 'Before Script Stage........'
+ - wget   http://labs.mediatek.com/en/download/5dGQA6m9
+ - ls -l
+# - ls -l /opt/buildroot-gcc342
+# - ls -l /opt/buildroot-gcc342/bin
+
+
+script:
+ - echo 'Script Stage........'
+ - make
+
+
+after_success:
+ - echo 'After Success Stage........'
+
+after_failure:
+ - echo 'After Failure Stage........'
+
+
+after_script:
+ - echo 'After Script Stage........'
